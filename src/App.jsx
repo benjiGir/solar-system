@@ -21,7 +21,7 @@ function App() {
             <Suspense fallback={null}>
               <Sun />
               {planetsData.map(planet => 
-                  <Planet position={planet.distFromSun + 2.5} size={planet.diameter} key={planet.name} />
+                  <Planet position={planet.distFromSun + 2.5} size={planet.diameter} speed={planet.orbitalSpeed} key={planet.name} />
                 )
               }
               <Lights />

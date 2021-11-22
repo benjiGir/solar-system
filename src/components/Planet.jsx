@@ -3,11 +3,11 @@ import { useRef } from "react"
 
 import ElipticOrbit from "./ElipticOrbit"
 
-function Planet({ position, size }) {
+function Planet({ position, size, speed }) {
   const planetRef = useRef()
 
   useFrame(({clock}) => {
-    const t = clock.getElapsedTime()
+    const t = clock.getElapsedTime() * speed
     const x = (position * 4) * Math.sin(t)
     const z = (position * 2) * Math.cos(t)
     planetRef.current.position.x = x
