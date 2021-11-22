@@ -1,10 +1,11 @@
 import React, { Suspense, useContext } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { FlyControls, OrbitControls } from '@react-three/drei'
 
 import Sun from './components/Sun'
 import Lights from './components/Lights'
 import Planet from './components/Planet'
+import { planetsData } from './data/planetsData'
 
 import './App.css'
 import PlanetsContext from './context/PlanetsContext'
@@ -19,12 +20,12 @@ function App() {
           <Canvas camera={{ position: [0, 20, 25], fov: 45}}>
             <Suspense fallback={null}>
               <Sun />
-              {planets.map(planet => 
-                  <Planet position={Math.floor(planet.semimajorAxis / 10000000)} size={Math.floor(planet.equaRadius / 1000)} key={planet.englishName}/>
+              {planetsData.map(planet => 
+                  <Planet position={planet.distFromSun + 2.5} size={planet.diameter} key={planet.name} />
                 )
               }
               <Lights />
-              <OrbitControls />
+              <FlyControls autoForward={false} dragToLook={true} rollSpeed={1} movementSpeed={10.0} rotation={[0, Math.PI * 2, 0]}/>
             </Suspense>
           </Canvas>
         </div>}
