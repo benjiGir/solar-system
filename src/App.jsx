@@ -1,6 +1,6 @@
 import React, { Suspense, useContext } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { FlyControls } from '@react-three/drei'
+import { FlyControls, Stars } from '@react-three/drei'
 
 import Sun from './components/Sun'
 import Lights from './components/Lights'
@@ -17,13 +17,21 @@ function App() {
     <>
       {planets && 
         <div className="solarSystem">
-          <Canvas camera={{ position: [0, 100, 250], fov: 75}}>
+          <Canvas camera={{ position: [0, 100, 250], fov: 90, near: 0.1, far: 1000}} >
             <Suspense fallback={null}>
               <Sun />
               {planetsData.map(planet => 
                   <Planet position={planet.distFromSun + 25 } size={planet.diameter} speed={planet.orbitalSpeed} spin={planet.spinSpeed} name={planet.name} key={planet.name} />
                 )
               }
+              <Stars 
+                radius={500}
+                depth={100}
+                count={10000}
+                factor={10}
+                saturation={0}
+                fade
+              />
               <Lights />
               <FlyControls autoForward={false} dragToLook={true} rollSpeed={1} movementSpeed={50.0} rotation={[0, Math.PI * 2, 0]}/>
             </Suspense>
