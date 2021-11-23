@@ -33,7 +33,7 @@ function App() {
                 fade
               />
               <Lights />
-              <FlyControls autoForward={false} dragToLook={true} rollSpeed={1} movementSpeed={50.0} rotation={[0, Math.PI * 2, 0]}/>
+              <FlyControls autoForward={false} dragToLook={true} rollSpeed={1} movementSpeed={50.0} rotation={[Math.PI, Math.PI, Math.PI]}/>
             </Suspense>
           </Canvas>
         </div>}
