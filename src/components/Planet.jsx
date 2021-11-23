@@ -6,7 +6,10 @@ import ElipticOrbit from "./ElipticOrbit"
 
 function Planet({ position, size, speed, spin, name }) {
   const planetRef = useRef()
-  const colorMap = useLoader(TextureLoader, '../Public/Assets/Earth/colorMap.jpg')
+  const normalMap = useLoader(TextureLoader, '/Assets/Earth/8k_earth_normal_map.png')
+  const specularMap = useLoader(TextureLoader, '/Assets/Earth/8k_earth_specular_map.png')
+  const colorMap = useLoader(TextureLoader, '/Assets/Earth/colorMap.jpg')
+
 
   useFrame(({clock}) => {
     const t = ((clock.getElapsedTime() * speed) / 20)
@@ -20,8 +23,8 @@ function Planet({ position, size, speed, spin, name }) {
   return (
     <>
       <mesh ref={planetRef}>
-        <sphereGeometry args={[size, 32, 32]} />
-        <meshStandardMaterial map={colorMap}  />
+        <sphereGeometry args={[size, 64, 64]} />
+        <meshPhongMaterial map={colorMap} normalMap={normalMap} specularMap={specularMap}/>
       </mesh>
       <ElipticOrbit xRadius={position * 4} zRadius={position * 3} />
     </>
