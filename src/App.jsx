@@ -17,7 +17,7 @@ function App() {
     <>
       {planets && 
         <div className="solarSystem">
-          <Canvas camera={{ position: [0, 100, 250], fov: 90, near: 0.1, far: 1000}} >
+          <Canvas camera={{ position: [0, 100, 250], fov: 90, near: 0.1, far: 10000}} >
             <Suspense fallback={null}>
               <Sun />
               {planetsData.map(planet => 
@@ -33,7 +33,7 @@ function App() {
                 fade
               />
               <Lights />
-              <FlyControls autoForward={false} dragToLook={true} rollSpeed={1} movementSpeed={50.0} rotation={[Math.PI, Math.PI, Math.PI]}/>
+              <FlyControls autoForward={false} dragToLook={true} rollSpeed={.5} movementSpeed={50.0} rotation={[Math.PI, Math.PI, Math.PI]}/>
             </Suspense>
           </Canvas>
         </div>}

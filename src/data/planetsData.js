@@ -5,7 +5,8 @@ export const planetsData = [
     diameter: 0.39,
     distFromSun: 4.163,
     orbitalSpeed: 1.6,
-    spinSpeed: 0.0058
+    spinSpeed: 0.0058,
+    texture: '/Assets/Mercury/8k_mercury.jpg'
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ export const planetsData = [
     diameter: 0.94,
     distFromSun: 7.767,
     orbitalSpeed: 1.2,
-    spinSpeed: -0.0024
+    spinSpeed: -0.0024,
+    texture: '/Assets/Venus/8k_venus_surface.jpg'
   },
   {
     id: 3,
@@ -21,7 +23,12 @@ export const planetsData = [
     diameter: 1,
     distFromSun: 10.745,
     orbitalSpeed: 1,
-    spinSpeed: 0.01
+    spinSpeed: 0.01,
+    texture: {
+      colorMap: '/Assets/Earth/colorMap.jpg',
+      normalMap: '/Assets/Earth/8k_earth_normal_map.png',
+      specularMap: '/Assets/Earth/8k_earth_specular_map.png'
+    }
   },
   {
     id: 4,
