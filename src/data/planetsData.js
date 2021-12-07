@@ -36,7 +36,8 @@ export const planetsData = [
     diameter: 0.53,
     distFromSun: 16.368,
     orbitalSpeed: .8,
-    spinSpeed: 0.009
+    spinSpeed: 0.009,
+    texture: '/Assets/Mars/8k_mars.jpg'
   },
   {
     id: 5,
@@ -44,7 +45,8 @@ export const planetsData = [
     diameter: 11.2,
     distFromSun: 55.904,
     orbitalSpeed: .43,
-    spinSpeed: 0.021
+    spinSpeed: 0.021,
+    texture: '/Assets/Jupiter/8k_jupiter.jpg'
   },
   {
     id: 6,
@@ -52,7 +54,8 @@ export const planetsData = [
     diameter: 9.5,
     distFromSun: 102.521,
     orbitalSpeed: .32,
-    spinSpeed: 0.02
+    spinSpeed: 0.02,
+    texture: '/Assets/Saturn/8k_saturn.jpg'
   },
   {
     id: 7,
@@ -60,7 +63,8 @@ export const planetsData = [
     diameter: 4,
     distFromSun: 206.214,
     orbitalSpeed: .22,
-    spinSpeed: -0.0133
+    spinSpeed: -0.0133,
+    texture: '/Assets/Uranus/2k_uranus.jpg'
   },
   {
     id: 8,
@@ -68,7 +72,8 @@ export const planetsData = [
     diameter: 3.9,
     distFromSun: 323.291,
     orbitalSpeed: .18,
-    spinSpeed: 0.0142
+    spinSpeed: 0.0142,
+    texture: '/Assets/Neptune/2k_neptune.jpg'
   },
   {
     id: 9,
