@@ -40,7 +40,7 @@ function Planet({ planetId }) {
       </mesh>
       {
         planet.name === 'Saturn' ?
-        <Ring />
+        <Ring planetRef={planetRef} ringTexture={planet.ringTexture} />
         : null
       }
       <ElipticOrbit xRadius={planet.distFromSun * 4} zRadius={planet.distFromSun * 3} />
