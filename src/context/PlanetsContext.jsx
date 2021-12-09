@@ -14,12 +14,12 @@ export const PlanetsContextProvider = ({children}) => {
   const [planetData, setPlanetData] = useState([])
 
   useEffect(() => {
-    axios.get('https://api.le-systeme-solaire.net/rest/bodies/')
-         .then(response => setPlanets(response.data.bodies.filter(elem => elem.isPlanet === true)
-                                                          .sort((a,b) => a.semimajorAxis - b.semimajorAxis)
-                                                          ))
+    // axios.get('https://api.le-systeme-solaire.net/rest/bodies/')
+    //      .then(response => setPlanets(response.data.bodies.filter(elem => elem.isPlanet === true)
+    //                                                       .sort((a,b) => a.semimajorAxis - b.semimajorAxis)
+    //                                                       ))
     setPlanetData(planetsData)
-  }, [children])
+  }, [])
 
   return (
     <PlanetsContext.Provider

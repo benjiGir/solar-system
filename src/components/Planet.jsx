@@ -1,5 +1,5 @@
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useRef, useContext } from "react"
+import { useRef, useContext, useState, useEffect } from "react"
 import { TextureLoader } from "three"
 import PlanetsContext from "../context/PlanetsContext"
 
@@ -8,29 +8,36 @@ import ElipticOrbit from "./ElipticOrbit"
 function Planet({ planetId }) {
   const planetRef = useRef()
   const { planetData } = useContext(PlanetsContext)
+  const [ planet, setPlanet ] = useState()
 
+  useEffect(() => {
+    setPlanet(planetData[planetId - 1])
+  }, [])
+  
   useFrame(({clock}) => {
-    const t = ((clock.getElapsedTime() * planetData[planetId].orbitalSpeed) / 20)
-    const x = (planetData[planetId].distFromSun * 4) * Math.sin(t)
-    const z = (planetData[planetId].distFromSun * 3) * Math.cos(t)
-    planetRef.current.position.x = x
-    planetRef.current.position.z = z
-    planetRef.current.rotation.y += planetData[planetId].spinSpeed
+    if (planet) {
+      const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 20)
+      const x = (planet.distFromSun * 4) * Math.sin(t)
+      const z = (planet.distFromSun * 3) * Math.cos(t)
+      planetRef.current.position.x = x
+      planetRef.current.position.z = z
+      planetRef.current.rotation.y += planet.spinSpeed
+    }
   })
 
   return (
 
-    planetData[planetId] ? <>
+    planet ? <>
       <mesh ref={planetRef}>
-        <sphereGeometry args={[planetData[planetId].diameter, 64, 64]} />
+        <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         {
-          planetData[planetId].name === 'Earth' ?
-            <meshPhongMaterial map={useLoader(TextureLoader, planetData[planetId].texture.colorMap)} normalMap={useLoader(TextureLoader, planetData[planetId].texture.normalMap)} specularMap={useLoader(TextureLoader, planetData[planetId].texture.specularMap)}/>
+          planet.name === 'Earth' ?
+            <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture.colorMap)} normalMap={useLoader(TextureLoader, planet.texture.normalMap)} specularMap={useLoader(TextureLoader, planet.texture.specularMap)}/>
             :
-            <meshPhongMaterial map={useLoader(TextureLoader, planetData[planetId].texture)} />
+            <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture)} />
         }
       </mesh>
-      <ElipticOrbit xRadius={planetData[planetId].distFromSun * 4} zRadius={planetData[planetId].distFromSun * 3} />
+      <ElipticOrbit xRadius={planet.distFromSun * 4} zRadius={planet.distFromSun * 3} />
     </>
     : <></>
   )
