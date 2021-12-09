@@ -4,6 +4,7 @@ import { TextureLoader } from "three"
 import PlanetsContext from "../context/PlanetsContext"
 
 import ElipticOrbit from "./ElipticOrbit"
+import Ring from "./Ring"
 
 function Planet({ planetId }) {
   const planetRef = useRef()
@@ -37,6 +38,11 @@ function Planet({ planetId }) {
             <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture)} />
         }
       </mesh>
+      {
+        planet.name === 'Saturn' ?
+        <Ring />
+        : null
+      }
       <ElipticOrbit xRadius={planet.distFromSun * 4} zRadius={planet.distFromSun * 3} />
     </>
     : <></>
