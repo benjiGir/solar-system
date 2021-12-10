@@ -70,7 +70,6 @@ function Ring({ planetRef }) {
     <mesh visible ref={mesh} rotation={[2.21,.09,0]} castShadow={true} >
       <ringBufferGeometry attach="geometry" args={[13, 17, 64]} />
       <ringShaderMaterial attach="material" uniforms={ringUniforms} side={THREE.DoubleSide}/>
-      {/* <meshPhongMaterial attach="material"  map={useLoader(TextureLoader, ringTexture)} side={THREE.DoubleSide} /> */}
     </mesh>
   )
 }
