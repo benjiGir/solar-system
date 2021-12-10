@@ -1,15 +1,18 @@
 import React, { useRef } from 'react'
 import { extend, useFrame, useLoader } from '@react-three/fiber'
-import { TextureLoader } from 'three';
 import { shaderMaterial } from '@react-three/drei';
+import { TextureLoader } from 'three';
 import glsl from 'glslify'
 import * as THREE from 'three';
  
 const RingShaderMaterial = shaderMaterial(
   {
-    utexture: {value: new THREE.Texture()},
-    innerRadius: { value: 13 },
-    outerRadius: { value: 17 }
+    utexture: { 
+      type: "t",
+      value: undefined
+    },
+    innerRadius: { value: undefined },
+    outerRadius: { value: undefined }
   },
   glsl `
     varying vec3 vPos;
@@ -46,8 +49,17 @@ const RingShaderMaterial = shaderMaterial(
 
 extend({ RingShaderMaterial })
 
-function Ring({ planetRef, ringTexture }) {
+function Ring({ planetRef }) {
   const mesh = useRef();
+  const ringTexture = useLoader(TextureLoader, "/Assets/Saturn/8k_saturn_ring_alpha.png")
+  const ringUniforms = {
+    utexture: { 
+      type: "t",
+      value: ringTexture
+    },
+    innerRadius: { value: 13 },
+    outerRadius: { value: 17 }
+  }
 
   useFrame(() => {
     mesh.current.position.x = planetRef.current.position.x
@@ -57,7 +69,7 @@ function Ring({ planetRef, ringTexture }) {
   return (
     <mesh visible ref={mesh} rotation={[2.21,.09,0]} castShadow={true} >
       <ringBufferGeometry attach="geometry" args={[13, 17, 64]} />
-      <ringShaderMaterial texture={useLoader(TextureLoader, ringTexture)} side={THREE.DoubleSide}/>
+      <ringShaderMaterial attach="material" uniforms={ringUniforms} side={THREE.DoubleSide}/>
       {/* <meshPhongMaterial attach="material"  map={useLoader(TextureLoader, ringTexture)} side={THREE.DoubleSide} /> */}
     </mesh>
   )

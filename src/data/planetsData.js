@@ -55,8 +55,7 @@ export const planetsData = [
     distFromSun: 127.521,
     orbitalSpeed: .32,
     spinSpeed: 0.02,
-    texture: '/Assets/Saturn/8k_saturn.jpg',
-    ringTexture: '/Assets/Saturn/8k_saturn_ring_alpha.png'
+    texture: '/Assets/Saturn/8k_saturn.jpg'
   },
   {
     id: 7,
