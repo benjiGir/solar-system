@@ -1,28 +1,28 @@
-import React, { Suspense, useContext } from 'react'
-import { Canvas } from '@react-three/fiber'
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 
-import Scene from './components/Scene'
+import Homepage from './components/Homepage'
+const SolarSystem = React.lazy(() => import('./components/SolarSystem'))
 
 import './App.css'
-import PlanetsContext from './context/PlanetsContext'
-import { useContextBridge } from '@react-three/drei'
+import { Suspense } from 'react/cjs/react.production.min'
 
 function App() {
-  const ContextBridge = useContextBridge(PlanetsContext)
 
   return (
     <>
-        <div className="solarSystem">
-          <Canvas camera={{ position: [0, 100, 250], fov: 90, near: 0.1, far: 10000}} >
-            <ContextBridge>
-              <Suspense fallback={null}>
-                <Scene />
-              </Suspense>
-            </ContextBridge>
-          </Canvas>
-        </div>
+      <Routes>
+        <Route exact path="/" element={<Homepage />} />
+        <Route path="/solarsystem" element={
+          <Suspense fallback={null}>
+            <SolarSystem />
+          </Suspense>
+        } 
+        />
+      </Routes>
     </>
   )
+
 }
 
 export default App

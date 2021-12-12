@@ -30,7 +30,7 @@ function Scene() {
           <Neptune />
         </Suspense>
       <Stars 
-        radius={500}
+        radius={700}
         depth={100}
         count={10000}
         factor={10}
