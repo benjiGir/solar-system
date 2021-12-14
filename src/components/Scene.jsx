@@ -18,27 +18,29 @@ function Scene() {
 
   return (
     <>
-      <Sun />
-        <Suspense fallback={null}>
-          <Mercury />
-          <Venus />
-          <Earth />
-          <Mars />
-          <Jupiter />
-          <Saturn />
-          <Uranus />
-          <Neptune />
-        </Suspense>
-      <Stars 
-        radius={700}
-        depth={100}
-        count={10000}
-        factor={10}
-        saturation={0}
-        fade
-      />
-      <Lights />
-      <FlyControls autoForward={false} dragToLook={true} rollSpeed={.5} movementSpeed={50.0} rotation={[Math.PI, Math.PI, Math.PI]}/>
+      <Suspense fallback={null} >
+          <Suspense fallback={null}>
+            <Sun />
+            <Mercury />
+            <Venus />
+            <Earth />
+            <Mars />
+            <Jupiter />
+            <Saturn />
+            <Uranus />
+            <Neptune />
+          </Suspense>
+        <Stars 
+          radius={700}
+          depth={100}
+          count={10000}
+          factor={10}
+          saturation={0}
+          fade
+        />
+        <Lights />
+        <FlyControls autoForward={false} dragToLook={true} rollSpeed={.5} movementSpeed={50.0} rotation={[Math.PI, Math.PI, Math.PI]}/>
+       </Suspense> 
     </>
   )
 }

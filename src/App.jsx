@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { Loader } from '@react-three/drei'
 
 import Homepage from './components/Homepage'
 const SolarSystem = React.lazy(() => import('./components/SolarSystem'))
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route path="/solarsystem" element={
-          <Suspense fallback={null}>
+          <Suspense fallback={<Loader />}>
             <SolarSystem />
           </Suspense>
         } 

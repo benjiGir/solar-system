@@ -5,7 +5,7 @@ export const planetsData = [
     diameter: 0.39,
     distFromSun: 29.163,
     orbitalSpeed: 1.6,
-    spinSpeed: 0.0058,
+    spinSpeed: 0.00058,
     texture: '/Assets/Mercury/8k_mercury.jpg'
   },
   {
@@ -28,6 +28,14 @@ export const planetsData = [
       colorMap: '/Assets/Earth/colorMap.jpg',
       normalMap: '/Assets/Earth/8k_earth_normal_map.png',
       specularMap: '/Assets/Earth/8k_earth_specular_map.png'
+    },
+    moon: {
+      name: 'Moon',
+      diameter: 0.27,
+      distFromEarth: 4,
+      orbitalSpeed: 0.0343,
+      spinSpeed: 0.00027,
+      texture: '/Assets/Earth/8k_moon.jpeg'
     }
   },
   {

@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Loader, useContextBridge } from '@react-three/drei'
 
 import PlanetsContext from '../context/PlanetsContext'
-import Scene from './Scene'
+const Scene = React.lazy(() => import('./Scene'))
 
 function SolarSystem() {
   const ContextBridge = useContextBridge(PlanetsContext)
@@ -17,7 +17,6 @@ function SolarSystem() {
           </Suspense>
         </ContextBridge>
       </Canvas>
-      <Loader />
     </>
   )
 }
