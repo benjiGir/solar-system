@@ -17,7 +17,7 @@ function Jupiter() {
   
   useFrame(({clock}) => {
     if (planet) {
-      const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 20)
+      const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
       jupiterRef.current.position.x = x

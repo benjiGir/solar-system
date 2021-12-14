@@ -5,6 +5,7 @@ import { TextureLoader } from "three"
 import PlanetsContext from "../context/PlanetsContext"
 
 import ElipticOrbit from "../components/ElipticOrbit"
+import Moon from './Moon/Moon'
 
 function Earth() {
   const earthRef = useRef()
@@ -17,10 +18,10 @@ function Earth() {
   
   useFrame(({clock}) => {
     if (planet) {
-      const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 20)
+      const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      earthRef.current.position.x = x
+      earthRef.current.position.x = x 
       earthRef.current.position.z = z
       earthRef.current.rotation.y += planet.spinSpeed
     }
@@ -33,6 +34,7 @@ function Earth() {
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture.colorMap)} normalMap={useLoader(TextureLoader, planet.texture.normalMap)} specularMap={useLoader(TextureLoader, planet.texture.specularMap)}/>
       </mesh>
+      <Moon earthRef={earthRef}/>
       <ElipticOrbit xRadius={planet.distFromSun * 4} zRadius={planet.distFromSun * 3} />
     </>
     : <></>
