@@ -19,8 +19,8 @@ function Scene() {
   return (
     <>
       <Suspense fallback={null} >
+          <Lights />
           <Suspense fallback={null}>
-            <Lights />
             <Sun />
             <Mercury />
             <Venus />
