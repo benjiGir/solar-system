@@ -3,12 +3,12 @@
   <p>A full 3D real-time solar system you can explore and enjoy the planets rotating around the Sun.</p>
 </div>
 
-##The Project
+## The Project
 
 This project goal is to make a fully interactive solar system where you can freely navigate between each planets and display informations about it.
 I love space and astronomy so i found it was a good idea to make my own solar system.
 
-##Tech/Famework used
+## Tech/Famework used
 
 - React 17
 - ThreeJS
@@ -62,11 +62,11 @@ ReactDOM.render(
 )
 ```
 
-####React-three-drei
+#### React-three-drei
 
 Drei is a collection of useful helpers and abstractions for R3F
 
-##What's done ?
+## What's done ?
 
 - [x] Homepage
 - [x] Solar System
@@ -82,7 +82,7 @@ Drei is a collection of useful helpers and abstractions for R3F
   - [x] Neptune
 - [x] Eliptic orbit line
 
-##What's next
+## What's next
 
 - Make a realistic Sun using computed shader, i'm half way to achieve it but still need to figure it out how to sampled texture from shader
 - Add the Asteroids belt (maybe with Ceres)
