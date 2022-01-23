@@ -1,8 +1,8 @@
 function Lights() {
   return (
     <>
-      <ambientLight />
-      <pointLight position={[0, 0, 0]} />
+      <ambientLight intensity={.5} color={0xaaaaaa}/>
+      <pointLight position={[0, 0, 0]} intensity={2.5} color={0xffdcb4} />
     </>
   )
 }

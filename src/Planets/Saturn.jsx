@@ -28,7 +28,7 @@ function Saturn() {
   })
   return (
     planet ? <>
-      <mesh ref={saturnRef}>
+      <mesh ref={saturnRef} receiveShadow castShadow>
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture)} />
       </mesh>

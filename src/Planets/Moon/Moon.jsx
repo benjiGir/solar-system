@@ -6,12 +6,13 @@ import PlanetsContext from "../../context/PlanetsContext"
 
 import ElipticOrbit from "../../components/ElipticOrbit"
 
+let moonPositionIndex = 0
+
 function Moon({earthRef}) {
   const moonRef = useRef()
   const { planetData } = useContext(PlanetsContext)
   const [ moon, setMoon ] = useState()
 
-  let moonPositionIndex = 0
 
   useEffect(() => {
     setMoon(planetData[2].moon)
@@ -19,9 +20,9 @@ function Moon({earthRef}) {
 
   useFrame(({clock}) => {
     if (moon) {
-      const t = ((clock.getElapsedTime() * moon.orbitalSpeed) / 50 )
+      const t = ((clock.getElapsedTime() * moon.orbitalSpeed) / 1000 )
       const x = (moon.distFromEarth) * Math.sin(t * (moonPositionIndex += 1))
-      const z = (moon.distFromEarth) * Math.cos(t * moonPositionIndex)
+      const z = 1.2 * (moon.distFromEarth) * Math.cos(t * moonPositionIndex)
       moonRef.current.position.x = x + earthRef.current.position.x
       moonRef.current.position.z = z + earthRef.current.position.z
       moonRef.current.rotation.y += moon.spinSpeed

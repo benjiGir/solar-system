@@ -30,7 +30,7 @@ function Earth() {
 
   return (
     planet ? <>
-      <mesh ref={earthRef}>
+      <mesh ref={earthRef} receiveShadow castShadow>
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture.colorMap)} normalMap={useLoader(TextureLoader, planet.texture.normalMap)} specularMap={useLoader(TextureLoader, planet.texture.specularMap)}/>
       </mesh>

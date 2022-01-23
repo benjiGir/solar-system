@@ -19,6 +19,7 @@ function Scene() {
   return (
     <>
       <Suspense fallback={null} >
+          <Lights />
           <Suspense fallback={null}>
             <Sun />
             <Mercury />
@@ -38,7 +39,6 @@ function Scene() {
           saturation={0}
           fade
         />
-        <Lights />
         <FlyControls autoForward={false} dragToLook={true} rollSpeed={.5} movementSpeed={50.0} rotation={[Math.PI, Math.PI, Math.PI]}/>
        </Suspense> 
     </>

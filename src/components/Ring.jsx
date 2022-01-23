@@ -57,8 +57,8 @@ function Ring({ planetRef }) {
       type: "t",
       value: ringTexture
     },
-    innerRadius: { value: 13 },
-    outerRadius: { value: 17 }
+    innerRadius: { value: 12 },
+    outerRadius: { value: 20 }
   }
 
   useFrame(() => {
@@ -67,8 +67,8 @@ function Ring({ planetRef }) {
   })
 
   return (
-    <mesh visible ref={mesh} rotation={[2.21,.09,0]} castShadow={true} >
-      <ringBufferGeometry attach="geometry" args={[13, 17, 64]} />
+    <mesh visible ref={mesh} rotation={[Math.PI / 2, Math.PI / 8, 0]} receiveShadow castShadow>
+      <ringBufferGeometry attach="geometry" args={[12, 20, 64]} />
       <ringShaderMaterial attach="material" uniforms={ringUniforms} side={THREE.DoubleSide} transparent/>
     </mesh>
   )
