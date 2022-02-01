@@ -1,11 +1,16 @@
 import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
 import { useRef, useContext, useState, useEffect } from "react"
-import { TextureLoader } from "three"
+import * as THREE from "three"
 import PlanetsContext from "../context/PlanetsContext"
 
 import ElipticOrbit from "../components/ElipticOrbit"
 import Moon from './Moon/Moon'
+import EarthClouds from '../components/EarthClouds'
+
+import EarthDayMap from '/Assets/Earth/colorMap.jpg'
+import EarthNormalMap from '/Assets/Earth/8k_earth_normal_map.png'
+import EarthSpecularMap from '/Assets/Earth/8k_earth_specular_map.png'
 
 function Earth() {
   const earthRef = useRef()
@@ -15,6 +20,11 @@ function Earth() {
   useEffect(() => {
     setPlanet(planetData[2])
   }, [])
+
+  const [colorMap, normalMap, specularMap] = useLoader(
+    THREE.TextureLoader,
+    [EarthDayMap, EarthNormalMap, EarthSpecularMap]
+  )
   
   useFrame(({clock}) => {
     if (planet) {
@@ -32,7 +42,9 @@ function Earth() {
     planet ? <>
       <mesh ref={earthRef} receiveShadow castShadow>
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
-        <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture.colorMap)} normalMap={useLoader(TextureLoader, planet.texture.normalMap)} specularMap={useLoader(TextureLoader, planet.texture.specularMap)}/>
+        <meshPhongMaterial attach='material' specularMap={specularMap} />
+        <meshStandardMaterial attach='material' map={colorMap} normalMap={normalMap} />
+        <EarthClouds />
       </mesh>
       <Moon earthRef={earthRef}/>
       <ElipticOrbit xRadius={planet.distFromSun * 4} zRadius={planet.distFromSun * 3} />

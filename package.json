@@ -23,6 +23,7 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "@vitejs/plugin-react": "^1.0.0",
+    "r3f-perf": "^4.9.1",
     "vite": "^2.6.4"
   }
 }

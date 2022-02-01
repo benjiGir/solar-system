@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Loader, useContextBridge } from '@react-three/drei'
+import { Perf } from 'r3f-perf'
 
 import PlanetsContext from '../context/PlanetsContext'
 const Scene = React.lazy(() => import('./Scene'))
@@ -16,6 +17,7 @@ function SolarSystem() {
             <Scene />
           </Suspense>
         </ContextBridge>
+        <Perf />
       </Canvas>
     </>
   )
