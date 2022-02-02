@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Loader, useContextBridge } from '@react-three/drei'
+import { useContextBridge } from '@react-three/drei'
 
 import PlanetsContext from '../context/PlanetsContext'
 const Scene = React.lazy(() => import('./Scene'))

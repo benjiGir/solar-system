@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from 'react'
+import React from 'react'
 import { FlyControls, Stars } from '@react-three/drei'
 
 import Sun from './SunWithShader'
@@ -10,8 +10,9 @@ import Jupiter from '../Planets/Jupiter'
 import Saturn from '../Planets/Saturn'
 import Uranus from '../Planets/Uranus'
 import Neptune from '../Planets/Neptune'
-
 import Lights from '../components/Lights'
+
+
 
 
 function Scene() {
@@ -19,7 +20,7 @@ function Scene() {
   return (
     <>
       <Lights />
-      <Sun />
+      {/* <Sun /> */}
       <Mercury />
       <Venus />
       <Earth />

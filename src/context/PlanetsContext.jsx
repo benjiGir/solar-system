@@ -11,7 +11,7 @@ const PlanetsContext = createContext({
 
 export const PlanetsContextProvider = ({children}) => {
   const [planets, setPlanets] = useState([])
-  const [planetData, setPlanetData] = useState([])
+  // const [planetData, setPlanetData] = useState([])
 
   // useEffect(() => {
   //   // axios.get('https://api.le-systeme-solaire.net/rest/bodies/')
