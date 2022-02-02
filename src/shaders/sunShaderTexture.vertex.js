@@ -5,7 +5,6 @@ glsl`
 uniform float time;
 // varying vec2 vUv;
 // varying vec3 vPosition;
-uniform vec2 pixels;
 float PI = 3.141592653589793238;
 
 

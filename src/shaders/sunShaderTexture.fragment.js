@@ -3,8 +3,6 @@ import glsl from 'glslify';
 export const sunShaderTextureFragment =
 glsl`
 uniform float time;
-uniform float progress;
-uniform sampler2D texture1;
 uniform vec4 resolution;
 uniform samplerCube uPerlin; 
 // varying vec2 vUv;

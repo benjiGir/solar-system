@@ -8,7 +8,7 @@ import {sunShaderVertex} from '../shaders/sunShader.vertex';
 import {sunShaderTextureFragment} from '../shaders/sunShaderTexture.fragment';
 import {sunShaderTextureVertex} from '../shaders/sunShaderTexture.vertex';
 
-function Sun() {
+function SunTexture({setTexture}) {
   const [cubeRenderTarget] = useState(
     new THREE.WebGLCubeRenderTarget(256, {
     format: THREE.RGBFormat,
@@ -27,23 +27,21 @@ function Sun() {
     resolution: { type: 'v4', value: new THREE.Vector4() }
   }), []);
 
-  let texture = null;
-
   useFrame(({ clock, gl, scene }) => {
     const t = clock.getElapsedTime();
-    sunRef.current.material.uniforms.time.value = t;
-    
-    if (updated === false) {
+    const texture = cubeRenderTarget.texture;
+    sunRef.current.material.uniforms.time.value += t;
+    if(updated === false) {
       cameraRef.current.update(gl, scene);
       setUpdated(true);
     }
-    texture = cubeRenderTarget.texture;
+    setTexture(texture)
   });
 
 
   return (
     <>
-      <cubeCamera ref={cameraRef} args={[0.1, 100, cubeRenderTarget]} />
+      <cubeCamera ref={cameraRef} args={[0.1, 10, cubeRenderTarget]} />
       <mesh ref={sunRef} scale={[1, 1, 1]}>
         <sphereBufferGeometry attach='geometry' args={[50, 64, 64]} />
         <shaderMaterial
@@ -56,7 +54,6 @@ function Sun() {
           side={THREE.DoubleSide}
         />
       </mesh>
-      <SunObject texture={texture} />
     </>
   )
 }
@@ -75,7 +72,7 @@ function SunObject({texture}) {
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    meshRef.current.material.uniforms.time.value = t;
+    meshRef.current.material.uniforms.time.value += t;
     meshRef.current.material.uniforms.uPerlin.value = texture;
   });
 
@@ -89,6 +86,17 @@ function SunObject({texture}) {
         vertexShader={sunShaderTextureVertex}
       />
     </mesh>
+  )
+}
+
+function Sun() {
+  const [texture, setTexture] = useState();
+
+  return (
+    <>
+      <SunObject texture={texture ? texture : null} />
+      <SunTexture setTexture={setTexture} />
+    </>
   )
 }
 
