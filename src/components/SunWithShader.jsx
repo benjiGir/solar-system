@@ -1,23 +1,20 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useState } from 'react';
 import { useFrame } from "@react-three/fiber";
 
-import * as THREE from 'three'
+import * as THREE from 'three';
 
+import {sunShaderFragment} from '../shaders/sunShader.fragment';
+import {sunShaderVertex} from '../shaders/sunShader.vertex';
+import {sunShaderTextureFragment} from '../shaders/sunShaderTexture.fragment';
+import {sunShaderTextureVertex} from '../shaders/sunShaderTexture.vertex';
 
-import sunShaderFragment from '../shaders/sunShader.fragment.glsl';
-import sunShaderVertex from '../shaders/sunShader.vertex.glsl';
-import sunShaderTextureFragment from '../shaders/sunShaderTexture.fragment.glsl';
-import sunShaderTextureVertex from '../shaders/sunShaderTexture.vertex.glsl';
-
-
-
-function SunTexture() {
+function Sun() {
   const [cubeRenderTarget] = useState(
     new THREE.WebGLCubeRenderTarget(256, {
     format: THREE.RGBFormat,
     generateMipmaps: true,
     minFilter: THREE.LinearMipmapLinearFilter,
-    encoding: THREE.sRGBEncoding
+    encoding: THREE.sRGBEncoding,
   })
   );
   const [updated, setUpdated] = useState(false);
@@ -30,20 +27,23 @@ function SunTexture() {
     resolution: { type: 'v4', value: new THREE.Vector4() }
   }), []);
 
+  let texture = null;
+
   useFrame(({ clock, gl, scene }) => {
     const t = clock.getElapsedTime();
     sunRef.current.material.uniforms.time.value = t;
     
-    if (!updated) {
+    if (updated === false) {
       cameraRef.current.update(gl, scene);
       setUpdated(true);
     }
-    this.texture = cubeRenderTarget.texture;
+    texture = cubeRenderTarget.texture;
   });
+
 
   return (
     <>
-      <cubeCamera ref={cameraRef} args={[0.1, 10, cubeRenderTarget]} />
+      <cubeCamera ref={cameraRef} args={[0.1, 100, cubeRenderTarget]} />
       <mesh ref={sunRef} scale={[1, 1, 1]}>
         <sphereBufferGeometry attach='geometry' args={[50, 64, 64]} />
         <shaderMaterial
@@ -56,11 +56,12 @@ function SunTexture() {
           side={THREE.DoubleSide}
         />
       </mesh>
+      <SunObject texture={texture} />
     </>
   )
 }
 
-function SunObject() {
+function SunObject({texture}) {
   const meshRef = useRef();
 
   const uniforms = useMemo(
@@ -75,7 +76,7 @@ function SunObject() {
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     meshRef.current.material.uniforms.time.value = t;
-    meshRef.current.material.uniforms.uPerlin.value = this.texture;
+    meshRef.current.material.uniforms.uPerlin.value = texture;
   });
 
   return (
@@ -91,13 +92,5 @@ function SunObject() {
   )
 }
 
-function Sun() {
-  return (
-    <>
-      <SunObject />
-      <SunTexture />
-    </>
-  )
-}
 
 export default Sun;

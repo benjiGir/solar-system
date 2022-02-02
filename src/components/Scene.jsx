@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import { FlyControls, Stars } from '@react-three/drei'
 
-import Sun from './SunWithShader'
+// import SunWithShader from './SunWithShader'
+const Sun = React.lazy(() => import('./SunWithShader'))
 import Mercury from '../Planets/Mercury'
 import Venus from '../Planets/Venus'
 import Earth from '../Planets/Earth'
@@ -20,7 +21,9 @@ function Scene() {
   return (
     <>
       <Lights />
-      {/* <Sun /> */}
+      <Suspense fallback={null}>
+        <Sun />
+      </Suspense>
       <Mercury />
       <Venus />
       <Earth />

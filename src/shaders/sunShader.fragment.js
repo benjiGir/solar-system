@@ -1,10 +1,13 @@
+import glsl from 'glslify'
+
+export const sunShaderFragment = 
+glsl`
 uniform float time;
 uniform sampler2D utexture;
 uniform vec4 resolution;
-varying vec2 vUv;
+
 varying vec3 vPosition;
 float PI = 3.141592653589793238;
-
 
 
 vec4 mod289(vec4 x) {
@@ -149,4 +152,5 @@ void main() {
   float spots = max(snoise(p1), 0.);
   gl_FragColor = vec4(noisy);
   gl_FragColor *= mix(1., spots, 0.7);
-}
+}`;
+
