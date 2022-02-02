@@ -9,6 +9,7 @@ function Homepage() {
   const handleExplore = () => {
     navigate('/solarsystem')
   }
+  
 
   return (
     <main className={style.homepageContainer}>
