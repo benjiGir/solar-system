@@ -11,7 +11,7 @@ function SolarSystem() {
 
   return (
     <>
-      <Canvas mode="concurrent" camera={{ position: [0, 100, 250], fov: 75, near: 0.1, far: 10000}} colorManagement={false} shadowMap>
+      <Canvas mode="concurrent" pixelRatio={window.devicePixelRatio}camera={{ position: [0, 100, 250], fov: 75, near: 0.1, far: 10000}} colorManagement shadowMap>
         <ContextBridge>
           <Suspense fallback={null}>
             <Scene />

@@ -3,8 +3,6 @@ import glsl from 'glslify';
 export const sunShaderTextureVertex = 
 glsl`
 uniform float time;
-// varying vec2 vUv;
-// varying vec3 vPosition;
 float PI = 3.141592653589793238;
 
 
@@ -47,6 +45,5 @@ eyeVector = normalize(worldPosition.xyz - cameraPosition );
   vec3 p2 = position; 
   p2.xy = rot2 *p2.xy;
   vLayer2 = p2;
-  // vUv = uv;
   gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 }`;

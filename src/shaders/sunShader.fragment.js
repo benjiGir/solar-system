@@ -5,7 +5,6 @@ glsl`
 uniform float time;
 uniform sampler2D utexture;
 uniform vec4 resolution;
-
 varying vec3 vPosition;
 float PI = 3.141592653589793238;
 
