@@ -17,7 +17,6 @@ function SunTexture({setTexture}) {
     encoding: THREE.sRGBEncoding,
   })
   );
-  const [updated, setUpdated] = useState(false);
 
   const sunRef = useRef();
   const cameraRef = useRef();
@@ -31,10 +30,9 @@ function SunTexture({setTexture}) {
     const t = clock.getElapsedTime();
     const texture = cubeRenderTarget.texture;
     sunRef.current.material.uniforms.time.value = t;
-    if(updated === false) {
-      cameraRef.current.update(gl, scene);
-      setUpdated(true);
-    }
+
+    cameraRef.current.update(gl, scene);
+
     setTexture(texture)
   });
 
@@ -43,7 +41,7 @@ function SunTexture({setTexture}) {
     <>
       <cubeCamera ref={cameraRef} args={[0.1, 10, cubeRenderTarget]} />
       <mesh ref={sunRef} scale={[1, 1, 1]}>
-        <sphereBufferGeometry attach='geometry' args={[40, 64, 64]} />
+        <sphereBufferGeometry attach='geometry' args={[5, 64, 64]} />
         <shaderMaterial
           attach='material'
           uniforms={uniforms}
