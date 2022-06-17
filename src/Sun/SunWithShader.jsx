@@ -3,10 +3,10 @@ import { useFrame } from "@react-three/fiber";
 
 import * as THREE from 'three';
 
-import {sunShaderFragment} from '../shaders/sunShader.fragment';
-import {sunShaderVertex} from '../shaders/sunShader.vertex';
-import {sunShaderTextureFragment} from '../shaders/sunShaderTexture.fragment';
-import {sunShaderTextureVertex} from '../shaders/sunShaderTexture.vertex';
+import {sunShaderFragment} from '../Shaders/sunShader.fragment';
+import {sunShaderVertex} from '../Shaders/sunShader.vertex';
+import {sunShaderTextureFragment} from '../Shaders/sunShaderTexture.fragment';
+import {sunShaderTextureVertex} from '../Shaders/sunShaderTexture.vertex';
 
 function SunTexture({setTexture}) {
   const [cubeRenderTarget] = useState(
