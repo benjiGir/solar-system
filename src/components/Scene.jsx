@@ -2,11 +2,7 @@ import React, {Suspense} from 'react'
 import { FlyControls, Stars } from '@react-three/drei'
 
 // import SunWithShader from './SunWithShader'
-<<<<<<< HEAD
-const Sun = React.lazy(() => import('./SunWithShader'))
-=======
 const Sun = React.lazy(() => import('../Sun/SunWithShader'))
->>>>>>> af77308122ef8572d5b099a3ea94ff2eb11bc146
 import Mercury from '../Planets/Mercury'
 import Venus from '../Planets/Venus'
 import Earth from '../Planets/Earth'
