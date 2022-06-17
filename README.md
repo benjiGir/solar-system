@@ -10,7 +10,7 @@ I love space and astronomy so i found it was a good idea to make my own solar sy
 
 ## Tech/Famework used
 
-- React 17
+- React 18
 - ThreeJS
 - React-three-fiber
 - React-three-drei
@@ -70,7 +70,7 @@ Drei is a collection of useful helpers and abstractions for R3F
 
 - [x] Homepage
 - [x] Solar System
-  - [x] Sun -> Cheap version
+  - [x] Sun -> With nice shaders
   - [x] Mercury
   - [x] Venus
   - [x] Earth
@@ -84,7 +84,6 @@ Drei is a collection of useful helpers and abstractions for R3F
 
 ## What's next
 
-- Make a realistic Sun using computed shader, i'm half way to achieve it but still need to figure it out how to sampled texture from shader
 - Add the Asteroids belt (maybe with Ceres)
 - Add the ability to click on planet and follow it
 - Add a panel with information about the planet which is focused
