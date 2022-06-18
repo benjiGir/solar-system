@@ -2,11 +2,11 @@ import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
 import { useRef, useContext, useState, useEffect } from "react"
 import * as THREE from "three"
-import PlanetsContext from "../context/PlanetsContext"
+import PlanetsContext from "../../context/PlanetsContext"
 
-import ElipticOrbit from "../components/ElipticOrbit"
-import Moon from './Moon/Moon'
-import EarthClouds from '../components/EarthClouds'
+import ElipticOrbit from "../../components/ElipticOrbit"
+import Moon from '../Moon/Moon'
+import EarthClouds from './EarthClouds'
 
 import EarthDayMap from '/Assets/Earth/colorMap.jpg'
 import EarthNormalMap from '/Assets/Earth/8k_earth_normal_map.png'

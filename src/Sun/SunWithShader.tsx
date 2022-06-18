@@ -8,7 +8,7 @@ import {sunShaderVertex} from '../Shaders/sunShader.vertex';
 import {sunShaderTextureFragment} from '../Shaders/sunShaderTexture.fragment';
 import {sunShaderTextureVertex} from '../Shaders/sunShaderTexture.vertex';
 
-function SunTexture({setTexture}) {
+function SunTexture({ setTexture }) {
   const [cubeRenderTarget] = useState(
     new THREE.WebGLCubeRenderTarget(256, {
     format: THREE.RGBAFormat,

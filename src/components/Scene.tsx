@@ -5,7 +5,7 @@ import { FlyControls, Stars } from '@react-three/drei'
 const Sun = React.lazy(() => import('../Sun/SunWithShader'))
 import Mercury from '../Planets/Mercury'
 import Venus from '../Planets/Venus'
-import Earth from '../Planets/Earth'
+import Earth from '../Planets/Earth/Earth'
 import Mars from '../Planets/Mars'
 import Jupiter from '../Planets/Jupiter'
 import Saturn from '../Planets/Saturn'
