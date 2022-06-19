@@ -11,7 +11,7 @@ import Jupiter from '../Planets/Jupiter'
 import Saturn from '../Planets/Saturn'
 import Uranus from '../Planets/Uranus'
 import Neptune from '../Planets/Neptune'
-import Lights from '../components/Lights'
+import Lights from './Lights'
 
 
 
