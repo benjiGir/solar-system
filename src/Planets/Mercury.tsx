@@ -1,18 +1,18 @@
-import React from 'react'
-import { useRef, useContext, useState, useEffect } from "react"
+import { useRef, useState, useEffect } from "react"
 import { useFrame, useLoader } from "@react-three/fiber"
-import { TextureLoader } from "three"
-import PlanetsContext from "../context/PlanetsContext"
+import { Mesh, TextureLoader } from "three"
+import { usePlanetsDataStore } from "../Store/planetDataStore"
+import { Planet } from "./Planets.type"
 
 import ElipticOrbit from "../components/ElipticOrbit"
 
-function Mercury() {
-  const mercuryRef = useRef()
-  const { planetData } = useContext(PlanetsContext)
-  const [ planet, setPlanet ] = useState()
+function Mercury(): JSX.Element {
+  const mercuryRef = useRef<Mesh>(null)
+  const planetsData = usePlanetsDataStore((state) => state.planetsData)
+  const [ planet, setPlanet ] = useState<Planet>()
 
   useEffect(() => {
-    setPlanet(planetData[0])
+    setPlanet(planetsData[0])
   }, [])
 
   useFrame(({clock}) => {
@@ -20,9 +20,9 @@ function Mercury() {
       const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      mercuryRef.current.position.x = x
-      mercuryRef.current.position.z = z
-      mercuryRef.current.rotation.y += planet.spinSpeed
+      mercuryRef.current!.position.x = x
+      mercuryRef.current!.position.z = z
+      mercuryRef.current!.rotation.y += planet.spinSpeed
     }
   })
 
