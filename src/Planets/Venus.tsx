@@ -18,7 +18,7 @@ type Venus = {
 function Venus(): JSX.Element {
   const venusRef = useRef<Mesh>(null)
   const planetsData = usePlanetsDataStore((state) => state.planetsData);
-  const [ planet, setPlanet ] = useState<>()
+  const [ planet, setPlanet ] = useState<Venus>()
 
   useEffect(() => {
     setPlanet(planetsData[1])
@@ -26,7 +26,7 @@ function Venus(): JSX.Element {
   
   useFrame(({clock}) => {
     if (planet) {
-      const t = ((clock.getElapsedTime() * planet?.orbitalSpeed) / 80)
+      const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
       venusRef.current!.position.x = x
