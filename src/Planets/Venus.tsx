@@ -1,28 +1,37 @@
-import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
 import { useRef, useContext, useState, useEffect } from "react"
-import { TextureLoader } from "three"
-import PlanetsContext from "../context/PlanetsContext"
+import { Mesh, Texture, TextureLoader } from "three"
+import { usePlanetsDataStore } from "../Store/planetDataStore"
 
 import ElipticOrbit from "../components/ElipticOrbit"
 
-function Venus() {
-  const venusRef = useRef()
-  const { planetData } = useContext(PlanetsContext)
-  const [ planet, setPlanet ] = useState()
+type Venus = {
+  id: number,
+  name: string,
+  diameter: number,
+  distFromSun: number,
+  orbitalSpeed: number,
+  spinSpeed: number,
+  texture: string,
+}
+
+function Venus(): JSX.Element {
+  const venusRef = useRef<Mesh>(null)
+  const planetsData = usePlanetsDataStore((state) => state.planetsData);
+  const [ planet, setPlanet ] = useState<>()
 
   useEffect(() => {
-    setPlanet(planetData[1])
+    setPlanet(planetsData[1])
   }, [])
   
   useFrame(({clock}) => {
     if (planet) {
-      const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
+      const t = ((clock.getElapsedTime() * planet?.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      venusRef.current.position.x = x
-      venusRef.current.position.z = z
-      venusRef.current.rotation.y += planet.spinSpeed
+      venusRef.current!.position.x = x
+      venusRef.current!.position.z = z
+      venusRef.current!.rotation.y += planet.spinSpeed
     }
   })
 
