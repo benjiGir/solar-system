@@ -25,7 +25,7 @@ type EarthTexture = {
   specularMap: string,
 }
 
-type Moon = {
+export type Moon = {
   name: string,
   diameter: number,
   distFromEarth: number,

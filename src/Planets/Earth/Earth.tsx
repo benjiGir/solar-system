@@ -1,39 +1,40 @@
-import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useRef, useContext, useState, useEffect } from "react"
-import * as THREE from "three"
-import PlanetsContext from "../../context/PlanetsContext"
+import { useRef, useState, useEffect } from "react"
+import { Mesh, Texture, TextureLoader } from "three"
+import { usePlanetsDataStore } from "../../Store/planetDataStore"
+import { Earth } from "../Planets.type"
 
 import ElipticOrbit from "../../components/ElipticOrbit"
 import Moon from '../Moon/Moon'
 import EarthClouds from './EarthClouds'
 
-import EarthDayMap from '/Assets/Earth/colorMap.jpg'
-import EarthNormalMap from '/Assets/Earth/8k_earth_normal_map.png'
-import EarthSpecularMap from '/Assets/Earth/8k_earth_specular_map.png'
-
 function Earth() {
-  const earthRef = useRef()
-  const { planetData } = useContext(PlanetsContext)
-  const [ planet, setPlanet ] = useState()
+  const earthRef = useRef<Mesh>(null)
+  const planetsData = usePlanetsDataStore((state) => state.planetsData)
+  const [ planet, setPlanet ] = useState<Earth>()
+  let colorMap, 
+      normalMap,
+      specularMap;
 
   useEffect(() => {
-    setPlanet(planetData[2])
+    setPlanet(planetsData[2])
   }, [])
 
-  const [colorMap, normalMap, specularMap] = useLoader(
-    THREE.TextureLoader,
-    [EarthDayMap, EarthNormalMap, EarthSpecularMap]
-  )
+  if (planet) {
+    [colorMap, normalMap, specularMap] = useLoader(
+      TextureLoader,
+      [planet?.texture.colorMap, planet?.texture.normalMap, planet?.texture.specularMap]
+    )
+  }
   
   useFrame(({clock}) => {
     if (planet) {
       const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      earthRef.current.position.x = x 
-      earthRef.current.position.z = z
-      earthRef.current.rotation.y += planet.spinSpeed
+      earthRef.current!.position.x = x 
+      earthRef.current!.position.z = z
+      earthRef.current!.rotation.y += planet.spinSpeed
     }
   })
 
