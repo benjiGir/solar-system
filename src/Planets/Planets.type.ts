@@ -17,6 +17,7 @@ export type Earth = {
   spinSpeed: number,
   texture: EarthTexture,
   moon: Moon,
+  cloudTexture: string,
 }
 
 type EarthTexture = {

@@ -4,10 +4,13 @@ import { Mesh, TextureLoader } from "three"
 import { usePlanetsDataStore } from "../../Store/planetDataStore"
 import { Moon } from "../Planets.type"
 
+interface IMoonProps { 
+  earthRef: React.RefObject<Mesh>
+}
 
 let moonPositionIndex = 0
 
-function Moon({earthRef}: any): JSX.Element {
+function Moon({earthRef}: IMoonProps): JSX.Element {
   const moonRef = useRef<Mesh>(null)
   const planetsData = usePlanetsDataStore((state) => state.planetsData)
   const [ moon, setMoon ] = useState<Moon>()
@@ -22,8 +25,8 @@ function Moon({earthRef}: any): JSX.Element {
       const t = ((clock.getElapsedTime() * moon.orbitalSpeed) / 1000 )
       const x = (moon.distFromEarth) * Math.sin(t * (moonPositionIndex += 1))
       const z = 1.2 * (moon.distFromEarth) * Math.cos(t * moonPositionIndex)
-      moonRef.current!.position.x = x + earthRef.current.position.x
-      moonRef.current!.position.z = z + earthRef.current.position.z
+      moonRef.current!.position.x = x + earthRef.current!.position.x
+      moonRef.current!.position.z = z + earthRef.current!.position.z
       moonRef.current!.rotation.y += moon.spinSpeed
     }
   })

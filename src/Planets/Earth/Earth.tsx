@@ -8,7 +8,7 @@ import ElipticOrbit from "../../components/ElipticOrbit"
 import Moon from '../Moon/Moon'
 import EarthClouds from './EarthClouds'
 
-function Earth() {
+function Earth(): JSX.Element {
   const earthRef = useRef<Mesh>(null)
   const planetsData = usePlanetsDataStore((state) => state.planetsData)
   const [ planet, setPlanet ] = useState<Earth>()
@@ -45,7 +45,7 @@ function Earth() {
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         <meshPhongMaterial attach='material' specularMap={specularMap} />
         <meshStandardMaterial attach='material' map={colorMap} normalMap={normalMap} />
-        <EarthClouds />
+        <EarthClouds clouds={planet.cloudTexture} />
       </mesh>
       <Moon earthRef={earthRef}/>
       <ElipticOrbit xRadius={planet.distFromSun * 4} zRadius={planet.distFromSun * 3} />
