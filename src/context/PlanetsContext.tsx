@@ -1,23 +1,22 @@
-import React, { createContext, useState, useEffect } from 'react'
-import axios from 'axios'
+import { createContext, useState, useEffect, ReactNode } from 'react'
 
 import { planetsData } from '../data/planetsData'
 
-const PlanetsContext = createContext({
+interface IPlanetData {
+  planets: any[],
+  setPlanets: () => void,
+}
+
+const PlanetsContext = createContext<IPlanetData>({
   planets: [],
-  planetData: [],
   setPlanets: () => {},
 })
 
-export const PlanetsContextProvider = ({children}) => {
+export const PlanetsContextProvider<ReactNode> = ({children}): JSX.Element => {
   const [planets, setPlanets] = useState([])
   const [planetData, setPlanetData] = useState([])
 
   useEffect(() => {
-    // axios.get('https://api.le-systeme-solaire.net/rest/bodies/')
-    //      .then(response => setPlanets(response.data.bodies.filter(elem => elem.isPlanet === true)
-    //                                                       .sort((a,b) => a.semimajorAxis - b.semimajorAxis)
-    //                                                       ))
     setPlanetData(planetsData)
   }, [])
 
