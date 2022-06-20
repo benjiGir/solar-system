@@ -1,18 +1,18 @@
-import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useRef, useContext, useState, useEffect } from "react"
-import { TextureLoader } from "three"
-import PlanetsContext from "../context/PlanetsContext"
+import { useRef, useState, useEffect } from "react"
+import { Mesh, TextureLoader } from "three"
 
 import ElipticOrbit from "../components/ElipticOrbit"
+import { usePlanetsDataStore } from "../Store/planetDataStore"
+import { Planet } from "./Planets.type"
 
 function Uranus() {
-  const uranusRef = useRef()
-  const { planetData } = useContext(PlanetsContext)
-  const [ planet, setPlanet ] = useState()
+  const uranusRef = useRef<Mesh>(null)
+  const planetsData = usePlanetsDataStore((state) => state.planetsData)
+  const [ planet, setPlanet ] = useState<Planet>()
 
   useEffect(() => {
-    setPlanet(planetData[6])
+    setPlanet(planetsData[6])
   }, [])
   
   useFrame(({clock}) => {
@@ -20,9 +20,9 @@ function Uranus() {
       const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      uranusRef.current.position.x = x
-      uranusRef.current.position.z = z
-      uranusRef.current.rotation.y += planet.spinSpeed
+      uranusRef.current!.position.x = x
+      uranusRef.current!.position.z = z
+      uranusRef.current!.rotation.y += planet.spinSpeed
     }
   })
 
