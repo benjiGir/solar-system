@@ -1,12 +1,12 @@
 import { useFrame, useLoader } from "@react-three/fiber"
 import { useRef, useState, useEffect } from "react"
 import { Mesh, TextureLoader } from "three"
+import { Planet } from "./Planets.type"
+import { usePlanetsDataStore } from "../Store/planetDataStore"
 
 import ElipticOrbit from "../components/ElipticOrbit"
-import { usePlanetsDataStore } from "../Store/planetDataStore"
-import { Planet } from "./Planets.type"
 
-function Uranus() {
+function Uranus(): JSX.Element {
   const uranusRef = useRef<Mesh>(null)
   const planetsData = usePlanetsDataStore((state) => state.planetsData)
   const [ planet, setPlanet ] = useState<Planet>()
