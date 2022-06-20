@@ -1,24 +1,15 @@
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useRef, useContext, useState, useEffect } from "react"
-import { Mesh, Texture, TextureLoader } from "three"
+import { useRef, useState, useEffect } from "react"
+import { Mesh, TextureLoader } from "three"
 import { usePlanetsDataStore } from "../Store/planetDataStore"
 
 import ElipticOrbit from "../components/ElipticOrbit"
-
-type Venus = {
-  id: number,
-  name: string,
-  diameter: number,
-  distFromSun: number,
-  orbitalSpeed: number,
-  spinSpeed: number,
-  texture: string,
-}
+import { Planet } from "./Planets.type"
 
 function Venus(): JSX.Element {
   const venusRef = useRef<Mesh>(null)
   const planetsData = usePlanetsDataStore((state) => state.planetsData);
-  const [ planet, setPlanet ] = useState<Venus>()
+  const [ planet, setPlanet ] = useState<Planet>()
 
   useEffect(() => {
     setPlanet(planetsData[1])
