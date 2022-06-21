@@ -18,7 +18,7 @@ function ElipticOrbit({ xRadius = 1, zRadius = 1 }: IElipticOrbitProps): JSX.Ele
 
   points.push(points[0])
 
-  return <Line points={points} color="#BFBBDA" linewidth={10} />
+  return <Line points={points} color="#BFBBDA" linewidth={0.5} />
 
 }
 

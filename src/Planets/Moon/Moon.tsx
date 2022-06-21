@@ -2,7 +2,7 @@ import { useFrame, useLoader } from "@react-three/fiber"
 import { useRef, useState, useEffect } from "react"
 import { Mesh, TextureLoader } from "three"
 import { usePlanetsDataStore } from "../../Store/planetDataStore"
-import { Moon } from "../Planets.type"
+import { TMoon } from "../Planets.type"
 
 interface IMoonProps { 
   earthRef: React.RefObject<Mesh>
@@ -13,7 +13,7 @@ let moonPositionIndex = 0
 function Moon({earthRef}: IMoonProps): JSX.Element {
   const moonRef = useRef<Mesh>(null)
   const planetsData = usePlanetsDataStore((state) => state.planetsData)
-  const [ moon, setMoon ] = useState<Moon>()
+  const [ moon, setMoon ] = useState<TMoon>()
 
 
   useEffect(() => {

@@ -8,7 +8,7 @@ export type Planet = {
   texture: string,
 }
 
-export type Earth = {
+export type PlanetEarth = {
   id: number,
   name: string,
   diameter: number,
@@ -16,7 +16,7 @@ export type Earth = {
   orbitalSpeed: number,
   spinSpeed: number,
   texture: EarthTexture,
-  moon: Moon,
+  moon: TMoon,
   cloudTexture: string,
 }
 
@@ -26,7 +26,7 @@ type EarthTexture = {
   specularMap: string,
 }
 
-export type Moon = {
+export type TMoon = {
   name: string,
   diameter: number,
   distFromEarth: number,

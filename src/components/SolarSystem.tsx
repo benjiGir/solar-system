@@ -12,7 +12,6 @@ function SolarSystem(): JSX.Element {
         <Suspense fallback={null}>
           <Scene />
         </Suspense>
-        <Perf />
       </Canvas>
     </>
   )

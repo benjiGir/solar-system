@@ -2,13 +2,9 @@ import { useRef } from 'react';
 import { useFrame, useLoader } from '@react-three/fiber'
 import { DoubleSide, Mesh, TextureLoader } from 'three';
 
-interface IEarthCloudsProps { 
-  clouds: string;
-}
-
-function EarthClouds({clouds}: IEarthCloudsProps): JSX.Element {
-  const cloudTexture = useLoader(TextureLoader, clouds);
+function EarthClouds(): JSX.Element {
   const cloudRef = useRef<Mesh>(null);
+  const cloudTexture = useLoader(TextureLoader, '/Assets/Earth/8k_earth_clouds.jpg');
 
   useFrame(() => {
     cloudRef.current!.rotation.y += 0.0008;

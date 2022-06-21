@@ -12,17 +12,11 @@ function Ring({ planetRef }: IRingProps): JSX.Element {
   const ref = useRef<Mesh>(null);
   const ringTexture = useLoader(TextureLoader, "/Assets/Saturn/8k_saturn_ring_alpha.png")
 
-  const ringShaderData = useMemo(() => ({
-    uniforms: {
-      utexture: { 
-        value: ringTexture
-      },
+  const ringUniforms = useMemo(() => ({
+      utexture: { value: ringTexture},
       innerRadius: { value: 12 },
       outerRadius: { value: 20 }
-    },
-    ringShaderVertex,
-    ringShaderFragment,
-  }), [])
+    }), [])
 
   useFrame(() => {
     ref.current!.position.x = planetRef.current!.position.x
@@ -32,7 +26,20 @@ function Ring({ planetRef }: IRingProps): JSX.Element {
   return (
     <mesh visible ref={ref} rotation={[Math.PI / 2, Math.PI / 8, 0]} receiveShadow castShadow>
       <ringBufferGeometry attach="geometry" args={[12, 20, 64]} />
-      <shaderMaterial attach="material" {...ringShaderData} side={DoubleSide} transparent/>
+      <shaderMaterial
+        uniforms={ringUniforms}
+        vertexShader={ringShaderVertex}
+        fragmentShader={ringShaderFragment}
+        side={DoubleSide} 
+        transparent 
+        extensions={
+          {
+            derivatives: true,
+            fragDepth: false,
+            drawBuffers: false,
+            shaderTextureLOD: false,
+          }
+        }/>
     </mesh>
   )
 }

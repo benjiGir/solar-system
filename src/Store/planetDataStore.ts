@@ -1,4 +1,4 @@
-import create from "zustand/react";
+import create from "zustand";
 
 interface IPlanetDataStore {
   planetsData: any[];
@@ -43,8 +43,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
         orbitalSpeed: 0.0343,
         spinSpeed: 0.00027,
         texture: '/Assets/Earth/8k_moon.jpeg'
-      },
-      cloudTexture: 'Assets/Earth/8k_earth_clouds.png'
+      }
     },
     {
       id: 4,
