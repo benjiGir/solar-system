@@ -1,7 +1,6 @@
 import React, {Suspense} from 'react'
 import { FlyControls, Stars } from '@react-three/drei'
 
-// import SunWithShader from './SunWithShader'
 const Sun = React.lazy(() => import('../Sun/SunWithShader'))
 import Mercury from '../Planets/Mercury'
 import Venus from '../Planets/Venus'
@@ -12,9 +11,6 @@ import Saturn from '../Planets/Saturn'
 import Uranus from '../Planets/Uranus'
 import Neptune from '../Planets/Neptune'
 import Lights from './Lights'
-
-
-
 
 function Scene(): JSX.Element {
 
