@@ -16,7 +16,7 @@ import Lights from './Lights'
 
 
 
-function Scene() {
+function Scene(): JSX.Element {
 
   return (
     <>

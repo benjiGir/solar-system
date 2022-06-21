@@ -1,5 +1,5 @@
 import { useRef, useMemo, useState } from 'react';
-import { MeshProps, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from 'three';
 
 import { sunShaderFragment } from '../Shaders/sunShader.fragment';
