@@ -1,19 +1,18 @@
-import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useRef, useContext, useState, useEffect } from "react"
-import { TextureLoader } from "three"
-import PlanetsContext from "../context/PlanetsContext"
+import { useRef, useState, useEffect } from "react"
+import { Mesh, TextureLoader } from "three"
+import { usePlanetsDataStore } from "../Store/planetDataStore"
 
 import ElipticOrbit from "../components/ElipticOrbit"
-import Ring from "../components/Ring"
+import { Planet } from "./Planets.type"
 
-function Saturn() {
-  const saturnRef = useRef()
-  const { planetData } = useContext(PlanetsContext)
-  const [ planet, setPlanet ] = useState()
+function Venus(): JSX.Element {
+  const venusRef = useRef<Mesh>(null)
+  const planetsData = usePlanetsDataStore((state) => state.planetsData);
+  const [ planet, setPlanet ] = useState<Planet>()
 
   useEffect(() => {
-    setPlanet(planetData[5])
+    setPlanet(planetsData[1])
   }, [])
   
   useFrame(({clock}) => {
@@ -21,22 +20,22 @@ function Saturn() {
       const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      saturnRef.current.position.x = x
-      saturnRef.current.position.z = z
-      saturnRef.current.rotation.y += planet.spinSpeed
+      venusRef.current!.position.x = x
+      venusRef.current!.position.z = z
+      venusRef.current!.rotation.y += planet.spinSpeed
     }
   })
+
   return (
     planet ? <>
-      <mesh ref={saturnRef} receiveShadow castShadow>
+      <mesh ref={venusRef}> 
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture)} />
       </mesh>
-      <Ring planetRef={saturnRef} />
       <ElipticOrbit xRadius={planet.distFromSun * 4} zRadius={planet.distFromSun * 3} />
     </>
     : <></>
   )
 }
 
-export default Saturn
+export default Venus
