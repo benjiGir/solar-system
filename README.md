@@ -5,7 +5,7 @@
 
 ## The Project
 
-This project goal is to make a fully interactive solar system where you can freely navigate between each planets and display informations about it.
+The goal is to make a fully interactive solar system where you can freely navigate between each planets and display informations about it.
 I love space and astronomy so i found it was a good idea to make my own solar system.
 
 ## Tech/Famework used
@@ -14,6 +14,7 @@ I love space and astronomy so i found it was a good idea to make my own solar sy
 - ThreeJS
 - React-three-fiber
 - React-three-drei
+- Typescript
 
 #### React-three-fiber as R3F
 
