@@ -1,4 +1,4 @@
-function Lights(): JSX.Element {
+function Lights() {
   return (
     <>
       <ambientLight intensity={.5} color={0xaaaaaa}/>

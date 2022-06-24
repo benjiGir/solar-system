@@ -1,18 +1,18 @@
+import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useRef, useState, useEffect } from "react"
-import { Mesh, TextureLoader } from "three"
-import { usePlanetsDataStore } from "../Store/planetDataStore"
-import { Planet } from "./Planets.type"
+import { useRef, useContext, useState, useEffect } from "react"
+import { TextureLoader } from "three"
+import PlanetsContext from "../context/PlanetsContext"
 
 import ElipticOrbit from "../components/ElipticOrbit"
 
-function Mars(): JSX.Element {
-  const marsRef = useRef<Mesh>(null)
-  const planetsData = usePlanetsDataStore((state) => state.planetsData)
-  const [ planet, setPlanet ] = useState<Planet>()
+function Venus() {
+  const venusRef = useRef()
+  const { planetData } = useContext(PlanetsContext)
+  const [ planet, setPlanet ] = useState()
 
   useEffect(() => {
-    setPlanet(planetsData[3])
+    setPlanet(planetData[1])
   }, [])
   
   useFrame(({clock}) => {
@@ -20,15 +20,15 @@ function Mars(): JSX.Element {
       const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      marsRef.current!.position.x = x
-      marsRef.current!.position.z = z
-      marsRef.current!.rotation.y += planet.spinSpeed
+      venusRef.current.position.x = x
+      venusRef.current.position.z = z
+      venusRef.current.rotation.y += planet.spinSpeed
     }
   })
 
   return (
     planet ? <>
-      <mesh ref={marsRef}>
+      <mesh ref={venusRef}> 
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture)} />
       </mesh>
@@ -38,4 +38,4 @@ function Mars(): JSX.Element {
   )
 }
 
-export default Mars
+export default Venus

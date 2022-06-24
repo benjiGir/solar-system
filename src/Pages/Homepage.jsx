@@ -1,8 +1,9 @@
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import style from './style/Homepage.module.css'
 
-function Homepage(): JSX.Element {
+function Homepage() {
   const navigate = useNavigate()
 
   const handleExplore = () => {

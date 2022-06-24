@@ -1,20 +1,22 @@
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import Homepage from './Pages/Homepage'
+import Homepage from './components/Homepage'
 import SolarSystem from './components/SolarSystem'
 
 import './App.css'
 
-function App(): JSX.Element {
+function App() {
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage />} />
         <Route path="/solarsystem" element={<SolarSystem />} />
       </Routes>
     </>
   )
+
 }
 
 export default App

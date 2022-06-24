@@ -1,21 +1,14 @@
-import { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { useFrame } from "@react-three/fiber";
+
 import * as THREE from 'three';
 
-import { sunShaderFragment } from '../Shaders/sunShader.fragment';
-import {sunShaderVertex} from '../Shaders/sunShader.vertex';
-import {sunShaderTextureFragment} from '../Shaders/sunShaderTexture.fragment';
-import {sunShaderTextureVertex} from '../Shaders/sunShaderTexture.vertex';
+import {sunShaderFragment} from '../shaders/sunShader.fragment';
+import {sunShaderVertex} from '../shaders/sunShader.vertex';
+import {sunShaderTextureFragment} from '../shaders/sunShaderTexture.fragment';
+import {sunShaderTextureVertex} from '../shaders/sunShaderTexture.vertex';
 
-interface ISunTexture {
-  setTexture: (texture: THREE.Texture) => void;
-}
-
-interface ISunObject {
-  texture: THREE.Texture | undefined;
-}
-
-function SunTexture({ setTexture }: ISunTexture): JSX.Element {
+function SunTexture({setTexture}) {
   const [cubeRenderTarget] = useState(
     new THREE.WebGLCubeRenderTarget(256, {
     format: THREE.RGBAFormat,
@@ -25,21 +18,20 @@ function SunTexture({ setTexture }: ISunTexture): JSX.Element {
   })
   );
 
-  const sunRef = useRef<THREE.ShaderMaterial>(null);
-  const cameraRef = useRef<THREE.CubeCamera>(null);
+  const sunRef = useRef();
+  const cameraRef = useRef();
 
   const uniforms = useMemo(() => ({
     time: { type: 'f', value: 0 },
-    resolution: { type: 'v4', value: new THREE.Vector4() },
-    envMap: { value: cubeRenderTarget.texture },
+    resolution: { type: 'v4', value: new THREE.Vector4() }
   }), []);
 
   useFrame(({ clock, gl, scene }) => {
     const t = clock.getElapsedTime();
     const texture = cubeRenderTarget.texture;
+    sunRef.current.material.uniforms.time.value = t;
 
-    sunRef.current!.uniforms.time.value = t ;
-    cameraRef.current!.update(gl, scene);
+    cameraRef.current.update(gl, scene);
 
     setTexture(texture)
   });
@@ -48,22 +40,15 @@ function SunTexture({ setTexture }: ISunTexture): JSX.Element {
   return (
     <>
       <cubeCamera ref={cameraRef} args={[0.1, 10, cubeRenderTarget]} />
-      <mesh scale={[1, 1, 1]}>
+      <mesh ref={sunRef} scale={[1, 1, 1]}>
         <sphereBufferGeometry attach='geometry' args={[5, 64, 64]} />
         <shaderMaterial
-          ref={sunRef}
           attach='material'
           uniforms={uniforms}
           fragmentShader={sunShaderFragment}
           vertexShader={sunShaderVertex}
-          extensions={
-            {
-              derivatives: true,
-              fragDepth: false,
-              drawBuffers: false,
-              shaderTextureLOD: false,
-            }
-          }
+          envMap={cubeRenderTarget.texture}
+          extensions="#extension GL_OES_standard_derivatives : enable"
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -71,8 +56,8 @@ function SunTexture({ setTexture }: ISunTexture): JSX.Element {
   )
 }
 
-function SunObject({ texture }: ISunObject): JSX.Element {
-  const meshRef = useRef<THREE.ShaderMaterial>(null);
+function SunObject({texture}) {
+  const meshRef = useRef();
 
   const uniforms = useMemo(
     () => ({
@@ -86,36 +71,28 @@ function SunObject({ texture }: ISunObject): JSX.Element {
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    meshRef.current!.uniforms.time.value = t;
-    meshRef.current!.uniforms.uPerlin.value = texture;
+    meshRef.current.material.uniforms.time.value = t;
+    meshRef.current.material.uniforms.uPerlin.value = texture;
     
   });
 
   return (
-    <mesh>
+    <mesh ref={meshRef}>
       <sphereBufferGeometry attach='geometry' args={[40, 64, 64]} />
       <shaderMaterial
-        ref={meshRef}
         attach='material'
         uniforms={uniforms}
         fragmentShader={sunShaderTextureFragment}
         vertexShader={sunShaderTextureVertex}
-        extensions={
-          {
-            derivatives: true,
-            fragDepth: false,
-            drawBuffers: false,
-            shaderTextureLOD: false,
-          }
-        }
+        extensions="#extension GL_OES_standard_derivatives : enable"
         side={THREE.DoubleSide}
       />
     </mesh>
   )
 }
 
-function Sun(): JSX.Element {
-  const [texture, setTexture] = useState<THREE.Texture>();
+function Sun() {
+  const [texture, setTexture] = useState();
 
   return (
     <>
@@ -124,5 +101,6 @@ function Sun(): JSX.Element {
     </>
   )
 }
+
 
 export default Sun;

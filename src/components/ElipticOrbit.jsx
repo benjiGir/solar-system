@@ -1,12 +1,6 @@
-import { Line } from '@react-three/drei';
 import * as THREE from 'three'
 
-interface IElipticOrbitProps {
-  xRadius: number;
-  zRadius: number;
-}
-
-function ElipticOrbit({ xRadius = 1, zRadius = 1 }: IElipticOrbitProps): JSX.Element {
+function ElipticOrbit({ xRadius = 1, zRadius = 1 }) {
   const points = []
 
   for (let i = 0; i < 64; i++) {
@@ -18,8 +12,15 @@ function ElipticOrbit({ xRadius = 1, zRadius = 1 }: IElipticOrbitProps): JSX.Ele
 
   points.push(points[0])
 
-  return <Line points={points} color="#BFBBDA" linewidth={0.5} />
+  const lineGeometry = new THREE.BufferGeometry().setFromPoints(points)
 
+  return (
+    <>
+      <line geometry={lineGeometry}>
+        <lineBasicMaterial attach="material" colore="#BFBBDA" linewidth={10} />
+      </line>
+    </>
+  )
 }
 
 export default ElipticOrbit

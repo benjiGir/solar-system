@@ -1,4 +1,4 @@
-import { glsl } from "../helpers/glsl";
+import glsl from 'glslify';
 
 export const sunShaderTextureVertex = 
 glsl`

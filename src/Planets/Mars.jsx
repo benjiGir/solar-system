@@ -1,18 +1,18 @@
+import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useRef, useState, useEffect } from "react"
-import { Mesh, TextureLoader } from "three"
+import { useRef, useContext, useState, useEffect } from "react"
+import { TextureLoader } from "three"
+import PlanetsContext from "../context/PlanetsContext"
 
 import ElipticOrbit from "../components/ElipticOrbit"
-import { usePlanetsDataStore } from "../Store/planetDataStore"
-import { Planet } from "./Planets.type"
 
-function Jupiter(): JSX.Element {
-  const jupiterRef = useRef<Mesh>(null)
-  const planetsData = usePlanetsDataStore((state) => state.planetsData)
-  const [ planet, setPlanet ] = useState<Planet>()
+function Mars() {
+  const marsRef = useRef()
+  const { planetData } = useContext(PlanetsContext)
+  const [ planet, setPlanet ] = useState()
 
   useEffect(() => {
-    setPlanet(planetsData[4])
+    setPlanet(planetData[3])
   }, [])
   
   useFrame(({clock}) => {
@@ -20,15 +20,15 @@ function Jupiter(): JSX.Element {
       const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      jupiterRef.current!.position.x = x
-      jupiterRef.current!.position.z = z
-      jupiterRef.current!.rotation.y += planet.spinSpeed
+      marsRef.current.position.x = x
+      marsRef.current.position.z = z
+      marsRef.current.rotation.y += planet.spinSpeed
     }
   })
 
   return (
     planet ? <>
-      <mesh ref={jupiterRef}>
+      <mesh ref={marsRef}>
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture)} />
       </mesh>
@@ -38,4 +38,4 @@ function Jupiter(): JSX.Element {
   )
 }
 
-export default Jupiter
+export default Mars

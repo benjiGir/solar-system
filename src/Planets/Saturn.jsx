@@ -1,18 +1,19 @@
+import React from 'react'
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useRef, useState, useEffect } from "react"
-import { Mesh, TextureLoader } from "three"
-import { usePlanetsDataStore } from "../Store/planetDataStore"
+import { useRef, useContext, useState, useEffect } from "react"
+import { TextureLoader } from "three"
+import PlanetsContext from "../context/PlanetsContext"
 
 import ElipticOrbit from "../components/ElipticOrbit"
-import { Planet } from "./Planets.type"
+import Ring from "../components/Ring"
 
-function Venus(): JSX.Element {
-  const venusRef = useRef<Mesh>(null)
-  const planetsData = usePlanetsDataStore((state) => state.planetsData);
-  const [ planet, setPlanet ] = useState<Planet>()
+function Saturn() {
+  const saturnRef = useRef()
+  const { planetData } = useContext(PlanetsContext)
+  const [ planet, setPlanet ] = useState()
 
   useEffect(() => {
-    setPlanet(planetsData[1])
+    setPlanet(planetData[5])
   }, [])
   
   useFrame(({clock}) => {
@@ -20,22 +21,22 @@ function Venus(): JSX.Element {
       const t = ((clock.getElapsedTime() * planet.orbitalSpeed) / 80)
       const x = (planet.distFromSun * 4) * Math.sin(t)
       const z = (planet.distFromSun * 3) * Math.cos(t)
-      venusRef.current!.position.x = x
-      venusRef.current!.position.z = z
-      venusRef.current!.rotation.y += planet.spinSpeed
+      saturnRef.current.position.x = x
+      saturnRef.current.position.z = z
+      saturnRef.current.rotation.y += planet.spinSpeed
     }
   })
-
   return (
     planet ? <>
-      <mesh ref={venusRef}> 
+      <mesh ref={saturnRef} receiveShadow castShadow>
         <sphereGeometry attach="geometry" args={[planet.diameter, 64, 64]} />
         <meshPhongMaterial attach='material' map={useLoader(TextureLoader, planet.texture)} />
       </mesh>
+      <Ring planetRef={saturnRef} />
       <ElipticOrbit xRadius={planet.distFromSun * 4} zRadius={planet.distFromSun * 3} />
     </>
     : <></>
   )
 }
 
-export default Venus
+export default Saturn
