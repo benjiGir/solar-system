@@ -88,3 +88,11 @@ Drei is a collection of useful helpers and abstractions for R3F
 - Add the Asteroids belt (maybe with Ceres)
 - Add the ability to click on planet and follow it
 - Add a panel with information about the planet which is focused
+
+## Enjoy the view
+
+![The system](./images/solar-system1.png)
+
+![Saturns and its rings](./images/solar-system2.png)
+
+![Earth and Moon](./images/solar-system3.png)
