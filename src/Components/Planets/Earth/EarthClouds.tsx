@@ -4,7 +4,7 @@ import { DoubleSide, Mesh, TextureLoader } from 'three';
 
 function EarthClouds(): JSX.Element {
   const cloudRef = useRef<Mesh>(null);
-  const cloudTexture = useLoader(TextureLoader, '/assets/Earth/8k_earth_clouds.jpg');
+  const cloudTexture = useLoader(TextureLoader, 'assets/Earth/8k_earth_clouds.jpg');
 
   useFrame(() => {
     cloudRef.current!.rotation.y += 0.0008;

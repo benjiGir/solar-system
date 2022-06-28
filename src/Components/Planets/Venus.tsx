@@ -2,8 +2,9 @@ import { useFrame, useLoader } from "@react-three/fiber"
 import { useRef, useState, useEffect } from "react"
 import { Mesh, TextureLoader } from "three"
 import { usePlanetsDataStore } from "../../Store/planetDataStore"
-
 import ElipticOrbit from "../ElipticOrbit"
+
+
 import { Planet } from "./Planets.type"
 
 function Venus(): JSX.Element {

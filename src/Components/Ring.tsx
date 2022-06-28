@@ -10,7 +10,7 @@ interface IRingProps {
 
 function Ring({ planetRef }: IRingProps): JSX.Element {
   const ref = useRef<Mesh>(null);
-  const ringTexture = useLoader(TextureLoader, "/assets/Saturn/8k_saturn_ring_alpha.png")
+  const ringTexture = useLoader(TextureLoader, "assets/Saturn/8k_saturn_ring_alpha.png")
 
   const ringUniforms = useMemo(() => ({
       utexture: { value: ringTexture},
