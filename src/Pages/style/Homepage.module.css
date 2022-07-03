@@ -16,17 +16,16 @@
   align-items: center;
   text-align: center;
   border: 1px solid white;
-  height: 30vh;
-  width: 50vw;
+  padding: 32px;
 }
 
 .homepageMenuContainer > p {
+  margin-top: 0;
   font-size: 2rem;
 }
 
 .homepageMenuContainer > button {
-  width: 15vw;
-  height: 10vh;
+  padding: 32px;
   background-color: black;
   border: 2px solid white;
   border-radius: 10px;

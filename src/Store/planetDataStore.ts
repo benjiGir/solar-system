@@ -13,7 +13,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
       distFromSun: 29.163,
       orbitalSpeed: 1.6,
       spinSpeed: 0.00058,
-      texture: 'assets/Mercury/8k_mercury.jpg'
+      texture: 'src/assets/Mercury/8k_mercury.jpg'
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
       distFromSun: 32.767,
       orbitalSpeed: 1.2,
       spinSpeed: -0.0024,
-      texture: 'assets/Venus/8k_venus_surface.jpg'
+      texture: 'src/assets/Venus/8k_venus_surface.jpg'
     },
     {
       id: 3,
@@ -32,9 +32,9 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
       orbitalSpeed: 1,
       spinSpeed: 0.01,
       texture: {
-        colorMap: 'assets/Earth/colorMap.jpg',
-        normalMap: 'assets/Earth/8k_earth_normal_map.png',
-        specularMap: 'assets/Earth/8k_earth_specular_map.png'
+        colorMap: 'src/assets/Earth/colorMap.jpg',
+        normalMap: 'src/assets/Earth/8k_earth_normal_map.png',
+        specularMap: 'src/assets/Earth/8k_earth_specular_map.png'
       },
       moon: {
         name: 'Moon',
@@ -42,7 +42,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
         distFromEarth: 4,
         orbitalSpeed: 0.0343,
         spinSpeed: 0.00027,
-        texture: 'assets/Earth/8k_moon.jpeg'
+        texture: 'src/assets/Earth/8k_moon.jpeg'
       }
     },
     {
@@ -52,7 +52,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
       distFromSun: 41.368,
       orbitalSpeed: .8,
       spinSpeed: 0.009,
-      texture: 'assets/Mars/8k_mars.jpg'
+      texture: 'src/assets/Mars/8k_mars.jpg'
     },
     {
       id: 5,
@@ -61,7 +61,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
       distFromSun: 80.904,
       orbitalSpeed: .43,
       spinSpeed: 0.021,
-      texture: 'assets/Jupiter/8k_jupiter.jpg'
+      texture: 'src/assets/Jupiter/8k_jupiter.jpg'
     },
     {
       id: 6,
@@ -70,7 +70,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
       distFromSun: 127.521,
       orbitalSpeed: .32,
       spinSpeed: 0.02,
-      texture: 'assets/Saturn/8k_saturn.jpg'
+      texture: 'src/assets/Saturn/8k_saturn.jpg'
     },
     {
       id: 7,
@@ -79,7 +79,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
       distFromSun: 231.214,
       orbitalSpeed: .22,
       spinSpeed: -0.0133,
-      texture: 'assets/Uranus/2k_uranus.jpg'
+      texture: 'src/assets/Uranus/2k_uranus.jpg'
     },
     {
       id: 8,
@@ -88,7 +88,7 @@ export const usePlanetsDataStore = create<IPlanetDataStore>(set => ({
       distFromSun: 348.291,
       orbitalSpeed: .18,
       spinSpeed: 0.0142,
-      texture: 'assets/Neptune/2k_neptune.jpg'
+      texture: 'src/assets/Neptune/2k_neptune.jpg'
     },
   ],
 }));

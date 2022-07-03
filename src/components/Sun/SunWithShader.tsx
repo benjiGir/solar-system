@@ -2,10 +2,10 @@ import { useRef, useMemo, useState } from 'react';
 import { useFrame } from "@react-three/fiber";
 import * as THREE from 'three';
 
-import { sunShaderFragment } from '../Shaders/sunShader.fragment';
-import {sunShaderVertex} from '../Shaders/sunShader.vertex';
-import {sunShaderTextureFragment} from '../Shaders/sunShaderTexture.fragment';
-import {sunShaderTextureVertex} from '../Shaders/sunShaderTexture.vertex';
+import { sunShaderFragment } from '../../Shaders/sunShader.fragment';
+import {sunShaderVertex} from '../../Shaders/sunShader.vertex';
+import {sunShaderTextureFragment} from '../../Shaders/sunShaderTexture.fragment';
+import {sunShaderTextureVertex} from '../../Shaders/sunShaderTexture.vertex';
 
 interface ISunTexture {
   setTexture: (texture: THREE.Texture) => void;
